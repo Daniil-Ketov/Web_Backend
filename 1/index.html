@@ -6,12 +6,57 @@
         </title>
     </head>
     <body>
-        <img src="1.png" alt="img1">
-        <img src="2-1.png" alt="img2-1">
-        <img src="2-2.png" alt="img2-2">
-        <img src="3.png" alt="img3">
-        <img src="4.png" alt="img4">
-        <img src="5.png" alt="img4">
-        <img src="6.png" alt="img4">
+        <ul>
+            <li>
+                <p>
+                    Подключаемся к серверу по ssh с помощью клиента Putty
+                </p>
+                <img src="0.png" alt="img0">
+            </li>
+            <li>
+                <p>
+                    Входим на сервер с помощью своего логина и пароля
+                </p>
+                <img src="1.png" alt="img1">
+            </li>
+            <li>
+                <p>
+                    С помощью утилиты Ping узнаем IP-адрес и проверим соединение.
+                    После отправки 111 пакетов, получим 111 ответов. Потерь - 0%.
+                </p>
+                <img src="2-1.png" alt="img2-1">
+            </li>
+            <li>
+                <img src="2-2.png" alt="img2-2">
+            </li>
+            <li>
+                <p>
+                    С помощью утилиты nslookup проверим A и MX записи доменов kubsu.ru и kubsu-dev.ru 
+                    (А записи позволят нам узнать IP-адрес, а MX - имя почтового сервера + приоритет)
+                </p>
+                <img src="3.png" alt="img3">
+            </li>
+            <li>
+                <p>
+                    С помощью команды whois определим дату регистрации домена kubsu.ru и kubsu-dev.ru
+                </p>
+                <img src="4.png" alt="img4">
+            </li>
+            <li>
+                <p>
+                    Перейдем в каталог /var/www/html/u47477/ с помощью команды cd.
+                    Скопируем репозитрий с github при помощи команды git clone.
+                    Дальнейшие изменения страницы будем подтягивать при помощи команды git pull. 
+                </p>
+                <img src="5.png" alt="img5">
+            </li>
+            <li>
+                <p>
+                    С помощью программы Filezilla соединимся с учебным сервером по протоколу sftp (порт 22).
+                    Перейдем в каталог /var/www/html/u47477/Web_Backend/1/ и скачаем файлы с сервера на локальный компьютер.
+                </p>
+                <img src="6.png" alt="img6">
+            </li>
+        </ul>
     </body>
 </html>
