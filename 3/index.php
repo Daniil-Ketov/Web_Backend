@@ -28,7 +28,7 @@ else if (empty($_POST['e-mail'])) {
   print('Заполните e-mail.<br/>');
   $errors = TRUE;
 }
-else if (!preg_match("/@/\./", $_POST['e-mail'])) {
+else if (!preg_match("/[a-z0-9]+@[a-z0-9]+\.[a-z]+/i", $_POST['e-mail'])) {
   print('Введите корректный e-mail.<br/>');
   $errors = TRUE;
 }
@@ -60,7 +60,7 @@ if ($errors) {
 
 // Сохранение в базу данных.
 $name = $_POST['name'];
-$email = $_POST['e-mail'];
+$email = strtolower($_POST['e-mail']);
 $bdate = $_POST['bdate'];
 $gender = $_POST['gender'];
 $limbs = $_POST['limbs'];
