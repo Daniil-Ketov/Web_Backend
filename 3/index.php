@@ -66,8 +66,6 @@ $gender = $_POST['gender'];
 $limbs = $_POST['limbs'];
 $superpowers = implode(',', $_POST['superpower']);
 $bio = $_POST['bio'];
-$check = $_POST['checkbox'];
-
 
 $user = 'u47477';
 $pass = '5680591';
@@ -75,7 +73,7 @@ $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass, array(PDO::ATT
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO form SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, superpowers = ?, bio = ?");
+  $stmt = $db->prepare("INSERT INTO form (name,email,bdate,gender,limbs,superpowers,bio) SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, superpowers = ?, bio = ?");
   $stmt -> execute(array($name, $email, $bdate, $gender, $limbs, $superpowers, $bio));
   $id = $db->lastInsertId();
   echo "Данные успешно сохранены." . $id;
