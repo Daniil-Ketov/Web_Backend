@@ -73,8 +73,9 @@ $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass, array(PDO::ATT
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO form (name,email,bdate,gender,limbs,superpowers,bio) SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, superpowers = ?, bio = ?");
-  $stmt -> execute(array($name, $email, $bdate, $gender, $limbs, $superpowers, $bio));
+  $stmt = $db->prepare("INSERT INTO form (name,email,bdate,gender,limbs,superpowers,bio) VALUES(?, ?, ?, ?, ?, ?, ?)");
+  $stmt -> bindParam('ssisisb', $name, $email, $bdate, $gender, $limbs, $superpowers, $bio);
+  $stmt -> execute();
   $id = $db->lastInsertId();
   echo "Данные успешно сохранены." . $id;
 }
