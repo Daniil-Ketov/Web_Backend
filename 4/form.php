@@ -34,7 +34,7 @@
           <label class="field-name">
             e-mail <br>
           </label>
-          <input name="e-mail" type="text" <?php if ($errors['e-mail']) {print 'class="error"';} ?> value="<?php print $values['e-mail']; ?>" />
+          <input name="email" type="text" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>" />
         </li>
         <li>      
           <label class="field-name">

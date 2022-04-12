@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['limbs'] = !empty($_COOKIE['limbs_error']);
   $errors['bio'] = !empty($_COOKIE['bio_error']);
   $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
+  $errors['bdate'] = !empty($_COOKIE['checkbox_error']);
+  $errors['superpowers'] = !empty($_COOKIE['checkbox_error']);
   
   //email, bdate, gender, limbs, superpowers, bio
   // TODO: аналогично все поля.
