@@ -8,19 +8,6 @@
 </head>
 <body>
   <main>
-    <?php
-      if (!empty($messages)) {
-        print('<div id="messages">');
-        // Выводим все сообщения.
-        foreach ($messages as $message) {
-          print($message);
-        }
-        print('</div>');
-      }
-      
-      // Далее выводим форму отмечая элементы с ошибками классом error
-      // и задавая начальные значения элементов ранее сохраненными.
-    ?>
     <div class="popup-success"></div>
     <form action="" method="POST">
       <ul style="list-style: none;">
@@ -28,17 +15,18 @@
           <label class="field-name">
             Имя <br>
           </label>
-          <input name="name" type="text" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>" />
+          <input name="name" type="text" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $errors['name'] ? $messages['name'] : $values['name']; ?>" />
         </li>
         <li>
           <label class="field-name">
             e-mail <br>
           </label>
-          <input name="email" type="text" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>" />
+          <input name="email" type="text" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $errors['email'] ? $messages['email'] : $values['email']; ?>" />
         </li>
         <li>      
           <label class="field-name">
             Год рождения <br>
+            <p <?php if ($errors['bdate']) {print 'class="error"';} ?> > <?php if ($messages['bdate']) print $messages['bdate']; ?> </p>
           </label>
           <select name="bdate[]" class="select-dropdown">
           <?php
@@ -59,7 +47,7 @@
         <li>
           <label class="field-name">
             Пол <br>
-			<p <?php if ($errors['gender']) {print 'class="error"';} ?> > <?php print $values['gender']; ?> </p>
+			      <p <?php if ($errors['gender']) {print 'class="error"';} ?> > <?php if ($messages['gender']) print $messages['gender']; ?> </p>
           </label>
           <input type="radio" name="gender" value="m" <?php if ($errors['gender']) {print 'class="error"';} ?> >
           <label>
@@ -73,7 +61,7 @@
         <li>
           <label class="field-name">
             Количество конечностей <br>
-			<p <?php if ($errors['limbs']) {print 'class="error"';} ?> > <?php print $values['limbs']; ?> </p>
+			      <p <?php if ($errors['limbs']) {print 'class="error"';} ?> > <?php if ($messages['limbs']) print $messages['limbs']; ?> </p>
           </label>
           <input type="radio" name="limbs" value=0 <?php if ($errors['limbs']) {print 'class="error"';} ?> >
           <label>0</label>
@@ -91,6 +79,7 @@
         <li>
           <label class="field-name">
             Сверхспособности <br>
+            <p <?php if ($errors['superpowers']) {print 'class="error"';} ?> > <?php if ($messages['superpowers']) print $messages['superpowers']; ?> </p>
           </label>
           <select multiple="true" name="superpowers[]" class="select-list">
               <option value="Бессмертие">Бессмертие</option>
@@ -102,10 +91,10 @@
           <label class="field-name">
             Биография <br>
           </label>
-          <textarea name="bio" cols="30" rows="10" style="resize: none;" <?php if ($errors['bio']) {print 'class="error"';} ?> value="<?php print $values['bio']; ?>"></textarea>
+          <textarea name="bio" cols="30" rows="10" style="resize: none;" <?php if ($errors['bio']) {print 'class="error"';} ?> value="<?php print $messages['bio']; ?>"></textarea>
         </li>
         <li>
-		  <p <?php if ($errors['checkbox']) {print 'class="error"';} ?> > <?php print $values['checkbox']; ?> </p>
+		      <p <?php if ($errors['checkbox']) {print 'class="error"';} ?> > <?php if ($messages['checkbox']) print $messages['checkbox']; ?> </p>
           <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> >
           <label>
             С контрактом ознакомлен
@@ -113,6 +102,7 @@
         </li>
         <li>
           <input type="submit" class="submit" value="Отправить" />
+          <p><?php if ($messages['save']) print $messages['save']; ?></p>
         </li>
       </ul>
     </form>
