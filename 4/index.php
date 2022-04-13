@@ -142,12 +142,12 @@ else {
     setcookie('email_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
-  else if (!preg_match("/.+@.+\..+/i", $_POST['e-mail'])) {
+  else if (!preg_match("/.+@.+\..+/i", $_POST['email'])) {
     // Выдаем куку на день с флажком об ошибке в поле email.
     setcookie('email_error', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
-  else if (!preg_match("/[a-z0-9]+@[a-z0-9]+\.[a-z]+/i", $_POST['e-mail'])) {
+  else if (!preg_match("/[a-z0-9]+@[a-z0-9]+\.[a-z]+/i", $_POST['email'])) {
     // Выдаем куку на день с флажком об ошибке в поле email.
     setcookie('email_error', '3', time() + 24 * 60 * 60);
     $errors = TRUE;
