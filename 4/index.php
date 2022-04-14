@@ -28,6 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
   $errors['bdate'] = !empty($_COOKIE['bdate_error']);
   $errors['superpowers'] = !empty($_COOKIE['superpowers_error']);
+  
+  $messages['name'] = '';
+  $messages['email'] = '';
+  $messages['gender'] = '';
+  $messages['limbs'] = '';
+  $messages['bio'] = '';
+  $messages['checkbox'] = '';
+  $messages['superpowers'] = '';
+  $messages['bdate'] = '';
 
   // Выдаем сообщения об ошибках.
   if ($errors['name'] == '1') {
