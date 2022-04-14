@@ -49,11 +49,11 @@
             Пол <br>
 			      <p <?php if ($errors['gender']) {print 'class="error"';} ?> > <?php if ($messages['gender']) print $messages['gender']; ?> </p>
           </label>
-          <input type="radio" name="gender" value="m" <?php if ($errors['gender']) {print 'class="error"';} ?> >
+          <input type="radio" name="gender" value="m" <?php if ($errors['gender']) {print 'class="error"';} else if ($values['gender']) {print 'checked';} ?> >
           <label>
             Мужской
           </label>
-          <input type="radio" name="gender" value="w" <?php if ($errors['gender']) {print 'class="error"';} ?> >
+          <input type="radio" name="gender" value="w" <?php if ($errors['gender']) {print 'class="error"';} else if ($values['limbs']) {print 'checked';} ?> >
           <label>
             Женский
           </label>
@@ -63,17 +63,17 @@
             Количество конечностей <br>
 			      <p <?php if ($errors['limbs']) {print 'class="error"';} ?> > <?php if ($messages['limbs']) print $messages['limbs']; ?> </p>
           </label>
-          <input type="radio" name="limbs" value=0 <?php if ($errors['limbs']) {print 'class="error"';} ?> >
+          <input type="radio" name="limbs" value=0 <?php if ($errors['limbs']) {print 'class="error"';} else if ($values['limbs']) {print 'checked';} ?> >
           <label>0</label>
-          <input type="radio" name="limbs" value=1 <?php if ($errors['limbs']) {print 'class="error"';} ?> >
+          <input type="radio" name="limbs" value=1 <?php if ($errors['limbs']) {print 'class="error"';} else if ($values['limbs']) {print 'checked';} ?> >
           <label>1</label>
-          <input type="radio" name="limbs" value=2 <?php if ($errors['limbs']) {print 'class="error"';} ?> >
+          <input type="radio" name="limbs" value=2 <?php if ($errors['limbs']) {print 'class="error"';} else if ($values['limbs']) {print 'checked';} ?> >
           <label>2</label>
-          <input type="radio" name="limbs" value=3 <?php if ($errors['limbs']) {print 'class="error"';} ?> >
+          <input type="radio" name="limbs" value=3 <?php if ($errors['limbs']) {print 'class="error"';} else if ($values['limbs']) {print 'checked';} ?> >
           <label>3</label>
-          <input type="radio" name="limbs" value=4 <?php if ($errors['limbs']) {print 'class="error"';} ?> >
+          <input type="radio" name="limbs" value=4 <?php if ($errors['limbs']) {print 'class="error"';} else if ($values['limbs']) {print 'checked';} ?> >
           <label>4</label>
-          <input type="radio" name="limbs" value=5 <?php if ($errors['limbs']) {print 'class="error"';} ?> >
+          <input type="radio" name="limbs" value=5 <?php if ($errors['limbs']) {print 'class="error"';} else if ($values['limbs']) {print 'checked';} ?> >
           <label>5+</label>
         </li>
         <li>
@@ -82,9 +82,9 @@
             <p <?php if ($errors['superpowers']) {print 'class="error"';} ?> > <?php if ($messages['superpowers']) print $messages['superpowers']; ?> </p>
           </label>
           <select multiple="true" name="superpowers[]" class="select-list">
-              <option value="Бессмертие">Бессмертие</option>
-              <option value="Прохождение сквозь стены">Прохождение сквозь стены</option>
-              <option value="Левитация">Левитация</option>
+              <option value="Бессмертие" <?php if (in_array("Бессмертие", $superpowers)) {print 'checked';} ?> >Бессмертие</option>
+              <option value="Прохождение сквозь стены" <?php if (in_array("Прохождение сквозь стены", $superpowers)) {print 'checked';} ?> >Прохождение сквозь стены</option>
+              <option value="Левитация" <?php if (in_array("Левитация", $superpowers)) {print 'checked';} ?> >Левитация</option>
           </select>
         </li>
         <li>
