@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $messages['checkbox'] = '';
   $messages['superpowers'] = '';
   $messages['bdate'] = '';
+  $messages['save'] = '';
 
   // Выдаем сообщения об ошибках.
   if ($errors['name'] == '1') {
