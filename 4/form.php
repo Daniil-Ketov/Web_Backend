@@ -91,7 +91,7 @@
           <label class="field-name">
             Биография <br>
           </label>
-          <textarea name="bio" cols="30" rows="10" style="resize: none;" <?php if ($errors['bio']) {print 'class="error"';} ?> value="<?php print $messages['bio']; ?>"></textarea>
+          <textarea name="bio" cols="30" rows="10" style="resize: none;" <?php if ($errors['bio']) {print 'class="error"';} ?> value="<?php if ($messages['bio']) {print $messages['bio'];} else {print $values['bio'];} ?>"></textarea>
         </li>
         <li>
 		      <p <?php if ($errors['checkbox']) {print 'class="error"';} ?> > <?php if ($messages['checkbox']) print $messages['checkbox']; ?> </p>
