@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
   $errors['bdate'] = !empty($_COOKIE['bdate_error']);
   $errors['superpowers'] = !empty($_COOKIE['superpowers_error']);
-  
+
   $messages['name'] = '';
   $messages['email'] = '';
   $messages['gender'] = '';
@@ -44,55 +44,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('name_error', '', 100000);
     // Выводим сообщение.
-    $messages['name'] = '<div class="error">Заполните имя</div>';
+    $messages['name'] = 'Заполните имя';
   }
   else if ($errors['name'] == '1') {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('name_error', '', 100000);
     // Выводим сообщение.
-    $messages['name'] = '<div class="error">Используйте латинский алфавит или "-"</div>';
+    $messages['name'] = 'Используйте латинский алфавит или "-"';
   }
   if ($errors['email'] == '1') {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('email_error', '', 100000);
     // Выводим сообщение.
-    $messages['email'] = '<div class="error">Заполните email</div>';
+    $messages['email'] = 'Заполните email';
   }
   else if ($errors['email'] == '2') {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('email_error', '', 100000);
     // Выводим сообщение.
-    $messages['email'] = '<div class="error">Заполните email в формате test@test.com используя английский алфавит и цифры</div>';
+    $messages['email'] = 'Заполните email в формате test@test.com используя английский алфавит и цифры';
   }
   if ($errors['limbs']) {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('limbs_error', '', 100000);
     // Выводим сообщение.
-    $messages['limbs'] = '<div class="error">Заполните число конечностей</div>';
+    $messages['limbs'] = 'Заполните число конечностей';
   }
   if ($errors['gender']) {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('gender_error', '', 100000);
     // Выводим сообщение.
-    $messages['gender'] = '<div class="error">Заполните пол</div>';
+    $messages['gender'] = 'Заполните пол';
   }
   if ($errors['bio']) {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('bio_error', '', 100000);
     // Выводим сообщение.
-    $messages['bio'] = '<div class="error">Заполните биографию</div>';
+    $messages['bio'] = 'Заполните биографию';
   }
   if ($errors['superpowers']) {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('superpowers_error', '', 100000);
     // Выводим сообщение.
-    $messages['superpowers'] = '<div class="error">Нелегальная сверхспособность</div>';
+    $messages['superpowers'] = 'Нелегальная сверхспособность';
   }
   if ($errors['bdate']) {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('bdate_error', '', 100000);
     // Выводим сообщение.
-    $messages['bdate'] = '<div class="error">Выберите год рождения</div>';
+    $messages['bdate'] = 'Выберите год рождения';
   }
 
   // Складываем предыдущие значения полей в массив, если есть.
