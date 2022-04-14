@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages['name'] = 'Заполните имя';
   }
-  else if ($errors['name'] == '1') {
+  else if ($errors['name'] == '2') {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('name_error', '', 100000);
     // Выводим сообщение.
@@ -218,11 +218,9 @@ else {
     setcookie('superpowers_error', '', 100000);
     setcookie('bio_error', '', 100000);
     setcookie('checkbox_error', '', 100000);
-    // TODO: тут необходимо удалить остальные Cookies.
   }
 
   // Сохранение в XML-документ.
-  // ...
   $user = 'u47477';
   $pass = '5680591';
   $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
