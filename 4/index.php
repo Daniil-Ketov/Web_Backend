@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['gender'] = empty($_COOKIE['gender_value']) ? '' : $_COOKIE['gender_value'];
   $values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
   $values['bdate'] = empty($_COOKIE['bdate_value']) ? '' : $_COOKIE['bdate_value'];
-  $superpowers = empty($_COOKIE['superpowers_value']) ? '' : $_COOKIE['superpowers_values'];
+  $superpowers = empty($_COOKIE['superpowers_value']) ? array() : $_COOKIE['superpowers_values'];
   $values['checkbox'] = empty($_COOKIE['checkbox_value']) ? '' : $_COOKIE['checkbox_value'];
 
   // Включаем содержимое файла form.php.
