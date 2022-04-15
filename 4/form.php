@@ -94,7 +94,9 @@
           <textarea name="bio" cols="30" rows="10" style="resize: none;" <?php if ($errors['bio']) {print 'class="error"';} ?> ><?php if ($messages['bio']) {print $messages['bio'];} else {print $values['bio'];} ?></textarea>
         </li>
         <li>
-		      <p <?php if ($errors['checkbox']) {print 'class="error"';} ?> > <?php if ($messages['checkbox']) print $messages['checkbox']; ?> </p>
+            <label>
+              <p <?php if ($errors['checkbox']) {print 'class="error"';} ?> > <?php if ($messages['checkbox']) print $messages['checkbox']; ?> </p>
+            </label>
           <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> <?php if ($values['checkbox']) {print 'checked';} ?> >
           <label>
             С контрактом ознакомлен
@@ -102,7 +104,9 @@
         </li>
         <li>
           <input type="submit" class="submit" value="Отправить" />
-          <p><?php print $messages['save']; ?></p>
+          <label>
+            <p><?php print $messages['save']; ?></p>
+          </label>
         </li>
       </ul>
     </form>
