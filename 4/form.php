@@ -102,7 +102,7 @@
         </li>
         <li>
           <input type="submit" class="submit" value="Отправить" />
-          <p><?php if ($messages['save']) print $messages['save']; ?></p>
+          <p><?php print $messages['save']; ?></p>
         </li>
       </ul>
     </form>
