@@ -6,18 +6,7 @@ header('Content-Type: text/html; charset=UTF-8');
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  // Массив для временного хранения сообщений пользователю.
-  $messages = array();
-
   // В суперглобальном массиве $_COOKIE PHP хранит все имена и значения куки текущего запроса.
-  // Выдаем сообщение об успешном сохранении.
-  if (!empty($_COOKIE['save'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('save', '', 100000);
-    // Если есть параметр save, то выводим сообщение пользователю.
-    $messages['save'] = 'Спасибо, результаты сохранены.';
-  }
-
   // Складываем признак ошибок в массив.
   $errors = array();
   $errors['name'] = !empty($_COOKIE['name_error']);
@@ -30,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['superpowers'] = !empty($_COOKIE['superpowers_error']);
   $errors['save'] = !empty($_COOKIE['save_error']);
 
+  // Массив для временного хранения сообщений пользователю.
+  $messages = array();
   $messages['name'] = '';
   $messages['email'] = '';
   $messages['gender'] = '';
@@ -39,6 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $messages['superpowers'] = '';
   $messages['bdate'] = '';
   $messages['save'] = '';
+
+  // Выдаем сообщение об успешном сохранении.
+  if (!empty($_COOKIE['save'])) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('save', '', 100000);
+    // Если есть параметр save, то выводим сообщение пользователю.
+    $messages['save'] = 'Спасибо, результаты сохранены.';
+  }
 
   // Выдаем сообщения об ошибках.
   if ($errors['name'] == '1') {
