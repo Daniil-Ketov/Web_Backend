@@ -86,6 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages['bdate'] = 'Выберите год рождения';
   }
+  if ($errors['checkbox']) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('checkbox_error', '', 100000);
+    // Выводим сообщение.
+    $messages['checkbox'] = 'Согласитесь';
+  }
   if ($errors['save']) {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('save_error', '', 100000);
