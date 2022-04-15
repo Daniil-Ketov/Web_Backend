@@ -231,7 +231,7 @@ else {
     $user = 'u47477';
     $pass = '5680591';
     $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
-    $stmt1 = $db->prepare("INSERT INTO form SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?");
+    $stmt1 = $db->prepare("INSERT INTO form (name, email, bdate, gender, limbs, bio) SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?");
     $stmt1 -> execute([
       $_POST['name'],
       strtolower($_POST['email']),
@@ -240,7 +240,7 @@ else {
       $_POST['limbs'],
       $_POST['bio']
     ]);
-    $stmt2 = $db->prepare("INSERT INTO super SET id = ?, ability = ?");
+    $stmt2 = $db->prepare("INSERT INTO super (id, ability) SET id = ?, ability = ?");
     $id = $db->lastInsertId();
     foreach ($_POST['superpowers'] as $s)
       $stmt2 -> execute([$id, $s]);
