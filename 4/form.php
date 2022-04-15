@@ -36,7 +36,7 @@
             }
             foreach ($options as $option) {
             ?>
-              <option value=<?php echo $option;?> <?php if ($values['bdate'] == $option) {print 'selected';} ?> >
+              <option value="<?php echo $option;?>" <?php if (strval($option) == $values['bdate']) {print 'selected';} ?> >
                 <?php echo $option;?>
               </option>
             <?php
