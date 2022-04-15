@@ -20,7 +20,7 @@ main {
 }
 form {
     width: 400px;
-    height: 850px;
+    height: 800px;
     padding: 30px;
     margin: 10%;
     background-color: aliceblue;
@@ -95,7 +95,9 @@ textarea:focus {
     touch-action: manipulation;
 }
 .error {
-    border: 2px solid red;
+    color:indianred;
+    text-decoration: underline;
+    font-size: medium;
 }
 footer {
     flex-shrink: 0;
