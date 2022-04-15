@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
   $errors['bdate'] = !empty($_COOKIE['bdate_error']);
   $errors['superpowers'] = !empty($_COOKIE['superpowers_error']);
+  $errors['save'] = !empty($_COOKIE['save_error']);
 
   $messages['name'] = '';
   $messages['email'] = '';
@@ -93,6 +94,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('bdate_error', '', 100000);
     // Выводим сообщение.
     $messages['bdate'] = 'Выберите год рождения';
+  }
+  if ($errors['save']) {
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('save_error', '', 100000);
+    $messages['save'] = "Ошибка отправки: " . $_COOKIE['save_error'];
   }
 
   // Складываем предыдущие значения полей в массив, если есть.
@@ -225,7 +231,7 @@ else {
     $user = 'u47477';
     $pass = '5680591';
     $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
-    $stmt1 = $db->prepare("INSERT INTO form SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?;");
+    $stmt1 = $db->prepare("INSERT INTO form SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?");
     $stmt1 -> execute([
       $_POST['name'],
       strtolower($_POST['email']),
@@ -234,7 +240,7 @@ else {
       $_POST['limbs'],
       $_POST['bio']
     ]);
-    $stmt2 = $db->prepare("INSERT INTO super SET id = ?, ability = ?;");
+    $stmt2 = $db->prepare("INSERT INTO super SET id = ?, ability = ?");
     $id = $db->lastInsertId();
     foreach ($_POST['superpowers'] as $s)
       $stmt2 -> execute([$id, $s]);
@@ -242,7 +248,7 @@ else {
     setcookie('save', '1');
   }
   catch (PDOException $e) {
-    $messages['save'] = "Ошибка отправки: " . $e->getMessage();
+    setcookie('save_error', '$e->getMessage()', 100000);
     setcookie('save', '', 100000);
   }
 
