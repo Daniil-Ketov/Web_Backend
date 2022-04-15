@@ -221,26 +221,30 @@ else {
   }
 
   // Сохранение в XML-документ.
-  $user = 'u47477';
-  $pass = '5680591';
-  $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
-  $stmt1 = $db->prepare("INSERT INTO form SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?;");
-  $stmt1 -> execute([
-    $_POST['name'],
-    strtolower($_POST['email']),
-    $_POST['bdate'],
-    $_POST['gender'],
-    $_POST['limbs'],
-    $_POST['bio']
-  ]);
-  $stmt2 = $db->prepare("INSERT INTO super SET id = ?, ability = ?;");
-  $id = $db->lastInsertId();
-  foreach ($_POST['superpowers'] as $s)
-    $stmt2 -> execute([$id, $s]);
-  echo "Данные успешно сохранены." . $id;
-
-  // Сохраняем куку с признаком успешного сохранения.
-  setcookie('save', '1');
+  try {
+    $user = 'u47477';
+    $pass = '5680591';
+    $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
+    $stmt1 = $db->prepare("INSERT INTO form SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?;");
+    $stmt1 -> execute([
+      $_POST['name'],
+      strtolower($_POST['email']),
+      $_POST['bdate'],
+      $_POST['gender'],
+      $_POST['limbs'],
+      $_POST['bio']
+    ]);
+    $stmt2 = $db->prepare("INSERT INTO super SET id = ?, ability = ?;");
+    $id = $db->lastInsertId();
+    foreach ($_POST['superpowers'] as $s)
+      $stmt2 -> execute([$id, $s]);
+    // Сохраняем куку с признаком успешного сохранения.
+    setcookie('save', '1');
+  }
+  catch (PDOException $e) {
+    $messages['save'] = "Ошибка отправки: " . $e->getMessage();
+    setcookie('save', '', 100000);
+  }
 
   // Делаем перенаправление.
   header('Location: index.php');
