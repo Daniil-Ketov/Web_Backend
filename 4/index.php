@@ -245,7 +245,7 @@ else {
     foreach ($_POST['superpowers'] as $s)
       $stmt2 -> execute([$id, $s]);
     // Сохраняем куку с признаком успешного сохранения.
-    setcookie('save', '1');
+    setcookie('save', '1', 100000);
   }
   catch (PDOException $e) {
     setcookie('save_error', '$e->getMessage()', 100000);
