@@ -28,7 +28,7 @@
             Год рождения <br>
             <p <?php if ($errors['bdate']) {print 'class="error"';} ?> > <?php if ($messages['bdate']) print $messages['bdate']; ?> </p>
           </label>
-          <select name="bdate[]" class="select-dropdown">
+          <select name="bdate" class="select-dropdown">
           <?php
             $options = array();
             for ($i = 1900; $i <= 2022; $i++) {
