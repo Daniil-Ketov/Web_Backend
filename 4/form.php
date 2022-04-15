@@ -94,7 +94,7 @@
           <textarea name="bio" cols="30" rows="10" style="resize: none;" <?php if ($errors['bio']) {print 'class="error"';} ?> ><?php if ($messages['bio']) {print $messages['bio'];} else {print $values['bio'];} ?></textarea>
         </li>
         <li>
-            <label>
+            <label class="field-name">
               <p <?php if ($errors['checkbox']) {print 'class="error"';} ?> > <?php if ($messages['checkbox']) print $messages['checkbox']; ?> </p>
             </label>
           <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> <?php if ($values['checkbox']) {print 'checked';} ?> >
@@ -104,7 +104,7 @@
         </li>
         <li>
           <input type="submit" class="submit" value="Отправить" />
-          <label>
+          <label class="field-name">
             <p><?php print $messages['save']; ?></p>
           </label>
         </li>
