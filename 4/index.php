@@ -249,4 +249,4 @@ else {
   // Делаем перенаправление.
   header('Location: index.php');
 }
-
+?>
