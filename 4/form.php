@@ -95,7 +95,7 @@
         </li>
         <li>
             <label class="field-name">
-              <p <?php if ($errors['checkbox']) {print 'class="error"';} ?> > <?php if ($messages['checkbox']) print $messages['checkbox']; ?> </p>
+              <p <?php if ($errors['checkbox']) {print 'class="error"';} ?> > <?php if ($messages['checkbox']) {print $messages['checkbox'];} ?> </p>
             </label>
           <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> <?php if ($values['checkbox']) {print 'checked';} ?> >
           <label>
@@ -105,7 +105,7 @@
         <li>
           <input type="submit" class="submit" value="Отправить" />
           <label class="field-name">
-            <p><?php print $messages['save']; ?></p>
+            <p> <?php print $messages['save']; ?> </p>
           </label>
         </li>
       </ul>
