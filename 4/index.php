@@ -164,7 +164,7 @@ else {
     setcookie('gender_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
   }
 
-  if (empty($_POST['limbs'])) {
+  if (empty($_POST['limbs']) && $_POST['limbs'] !== '0') {
     // Выдаем куку на день с флажком об ошибке в поле limbs.
     setcookie('limbs_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
