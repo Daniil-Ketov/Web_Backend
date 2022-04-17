@@ -250,14 +250,17 @@ else {
     $id = $db->lastInsertId();
     foreach ($_POST['superpowers'] as $s)
       $stmt2 -> execute([$id, $s]);
-    // Сохраняем куку с признаком успешного сохранения.
-    setcookie('save', '1', 100000);
   }
   catch (PDOException $e) {
     setcookie('save_error', '$e->getMessage()', 100000);
     setcookie('save', '', 100000);
+    header('Location: index.php');
+    exit();
   }
 
+  // Сохраняем куку с признаком успешного сохранения.
+  setcookie('save', '1', 100000);
+  
   // Делаем перенаправление.
   header('Location: index.php');
 }
