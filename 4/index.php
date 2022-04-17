@@ -98,11 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages['data_saved'] = "Ошибка отправки: " . $_COOKIE['save_error'];
   }
 
-  
   // Выдаем сообщение об успешном сохранении.
-  if (!empty($_COOKIE['data_saved'])) {
-    // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('data_saved', '0', 100000, '/Web_Backend/4');
+  if ($_GET['save']) {
     // Если есть параметр save, то выводим сообщение пользователю.
     $messages['data_saved'] = 'Спасибо, результаты сохранены.';
   }
@@ -253,16 +250,11 @@ else {
   }
   catch (PDOException $e) {
     setcookie('save_error', '$e->getMessage()', 100000);
-    setcookie('data_saved', '', 100000);
     header('Location: index.php');
     exit();
   }
 
-  // Сохраняем куку с признаком успешного сохранения.
-  setcookie('data_saved', '1', 100000, '/Web_Backend/4');
-  echo $_COOKIE['data_saved'];
-
   // Делаем перенаправление.
-  header('Location: index.php');
+  header('Location: index.php?save=1');
 }
 ?>
