@@ -260,6 +260,7 @@ else {
 
   // Сохраняем куку с признаком успешного сохранения.
   setcookie('data_saved', '1', 100000);
+  echo $_COOKIE['data_saved'];
 
   // Делаем перенаправление.
   header('Location: index.php');
