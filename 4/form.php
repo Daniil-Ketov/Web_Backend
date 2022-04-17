@@ -100,9 +100,6 @@
           <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> <?php if ($values['checkbox']) {print 'checked';} ?> >
           <label>
             С контрактом ознакомлен
-            <p style="color:forestgreen;">
-              <?php if ($messages['data_saved']) {print $messages['data_saved'];} ?>
-           </p> 
           </label>
         </li>
         <li>
@@ -110,6 +107,9 @@
         </li>
       </ul>
     </form>
+    <p style="color:forestgreen;">
+      <?php if ($messages['data_saved']) {print $messages['data_saved'];} ?>
+    </p> 
   </main>
   <footer>
 		(c) Даниил Кетов 2022
