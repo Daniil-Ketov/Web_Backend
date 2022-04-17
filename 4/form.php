@@ -100,13 +100,11 @@
           <input type="checkbox" name="checkbox" <?php if ($errors['checkbox']) {print 'class="error"';} ?> <?php if ($values['checkbox']) {print 'checked';} ?> >
           <label>
             С контрактом ознакомлен
+            <p style="color:forestgreen;"> <?php print $messages['save']; ?> </p>
           </label>
         </li>
         <li>
           <input type="submit" class="submit" value="Отправить" />
-          <label class="field-name">
-            <p> <?php print $messages['save']; ?> </p>
-          </label>
         </li>
       </ul>
     </form>
