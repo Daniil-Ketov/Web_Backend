@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
   $errors['bdate'] = !empty($_COOKIE['bdate_error']);
   $errors['superpowers'] = !empty($_COOKIE['superpowers_error']);
-  $errors['save'] = !empty($_COOKIE['save_error']);
+  $errors['data_saved'] = !empty($_COOKIE['save_error']);
 
   // Массив для временного хранения сообщений пользователю.
   $messages = array();
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $messages['checkbox'] = '';
   $messages['superpowers'] = '';
   $messages['bdate'] = '';
-  $messages['save'] = '';
+  $messages['data_saved'] = '';
 
   // Выдаем сообщения об ошибках.
   if ($errors['name'] == '1') {
@@ -92,19 +92,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение.
     $messages['checkbox'] = 'Согласитесь';
   }
-  if ($errors['save']) {
+  if ($errors['data_saved']) {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('save_error', '', 100000);
-    $messages['save'] = "Ошибка отправки: " . $_COOKIE['save_error'];
+    $messages['data_saved'] = "Ошибка отправки: " . $_COOKIE['save_error'];
   }
 
   
   // Выдаем сообщение об успешном сохранении.
-  if (!empty($_COOKIE['save'])) {
+  if (!empty($_COOKIE['data_saved'])) {
     // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('save', '', 100000);
+    setcookie('data_saved', '', 100000);
     // Если есть параметр save, то выводим сообщение пользователю.
-    $messages['save'] = 'Спасибо, результаты сохранены.';
+    $messages['data_saved'] = 'Спасибо, результаты сохранены.';
   }
 
   // Складываем предыдущие значения полей в массив, если есть.
@@ -253,14 +253,14 @@ else {
   }
   catch (PDOException $e) {
     setcookie('save_error', '$e->getMessage()', 100000);
-    setcookie('save', '', 100000);
+    setcookie('data_saved', '', 100000);
     header('Location: index.php');
     exit();
   }
 
   // Сохраняем куку с признаком успешного сохранения.
-  setcookie('save', '1', 100000);
-  
+  setcookie('data_saved', '1', 100000);
+
   // Делаем перенаправление.
   header('Location: index.php');
 }
