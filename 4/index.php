@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // Выдаем сообщение об успешном сохранении.
   if (!empty($_COOKIE['data_saved'])) {
     // Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('data_saved', '', 100000);
+    setcookie('data_saved', '0', 100000, '/Web_Backend/4');
     // Если есть параметр save, то выводим сообщение пользователю.
     $messages['data_saved'] = 'Спасибо, результаты сохранены.';
   }
@@ -259,7 +259,7 @@ else {
   }
 
   // Сохраняем куку с признаком успешного сохранения.
-  setcookie('data_saved', '1', 100000);
+  setcookie('data_saved', '1', 100000, '/Web_Backend/4');
   echo $_COOKIE['data_saved'];
 
   // Делаем перенаправление.
