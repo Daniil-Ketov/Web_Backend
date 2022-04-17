@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
 
   // Выдаем сообщение об успешном сохранении.
-  if ($_GET['save']) {
+  if (array_key_exists('save', $_GET) && $_GET['save']) {
     // Если есть параметр save, то выводим сообщение пользователю.
     $messages['data_saved'] = 'Спасибо, результаты сохранены.';
   }
