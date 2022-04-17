@@ -104,12 +104,12 @@
         </li>
         <li>
           <input type="submit" class="submit" value="Отправить" />
+          <p style="color:forestgreen;">
+            <?php if ($messages['data_saved']) {print $messages['data_saved'];} ?>
+          </p> 
         </li>
       </ul>
     </form>
-    <p style="color:forestgreen;">
-      <?php if ($messages['data_saved']) {print $messages['data_saved'];} ?>
-    </p> 
   </main>
   <footer>
 		(c) Даниил Кетов 2022
