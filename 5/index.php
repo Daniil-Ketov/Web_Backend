@@ -229,12 +229,6 @@ else {
     setcookie('checkbox_error', '', 100000);
   }
 
-  $alph = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  $login = uniqid();
-  $pass = '';
-  for ($i = 0; $i < 16; $i++) {
-    $pass .= $alph[random_int(0, strlen($alph) - 1)];
-  }
   // Сохранение в XML-документ.
   try {
     $db_user = 'u47477';
@@ -253,8 +247,6 @@ else {
     $id = $db->lastInsertId();
     foreach ($_POST['superpowers'] as $s)
       $stmt2 -> execute([$id, $s]);
-    $stmt3 = $db->prepare(("INSERT into users (id, login, password) SET id = ?, login = ?, password = ?"));
-    $stmt3->execute([$id, $login, md5($pass)]);
   }
   catch (PDOException $e) {
     setcookie('save_error', '$e->getMessage()', 100000);
