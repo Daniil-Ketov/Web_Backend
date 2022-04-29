@@ -229,23 +229,17 @@ else {
     setcookie('checkbox_error', '', 100000);
   }
 
-  // Генерируем уникальный логин и пароль.
-  // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
   $alph = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   $login = uniqid();
   $pass = '';
   for ($i = 0; $i < 16; $i++) {
     $pass .= $alph[random_int(0, strlen($alph) - 1)];
   }
-  // Сохраняем в Cookies.
-  setcookie('login', $login);
-  setcookie('pass', $pass);
-  // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
   // Сохранение в XML-документ.
   try {
-    $user = 'u47477';
-    $pass_db = '5680591';
-    $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass_db, array(PDO::ATTR_PERSISTENT => true));
+    $db_user = 'u47477';
+    $db_pass = '5680591';
+    $db = new PDO('mysql:host=localhost;dbname=u47477', $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true));
     $stmt1 = $db->prepare("INSERT INTO form (name, email, bdate, gender, limbs, bio) SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?");
     $stmt1 -> execute([
       $_POST['name'],
