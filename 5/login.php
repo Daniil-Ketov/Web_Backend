@@ -39,12 +39,6 @@ if (!empty($_SESSION['login'])) {
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  if (array_key_exists('login_error', $_GET) && $_GET['login_error']) {
-    print("<div>Неверный логин</div>");
-  }
-  if (array_key_exists('pass_error', $_GET) && $_GET['pass_error']) {
-    print("<div>Неверный пароль</div>");
-  }
 ?>
 
 <form action="" method="post">
@@ -54,12 +48,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         Логин <br>
       </label>
       <input type="text" name="login" />
+      <?php
+        if (array_key_exists('login_error', $_GET) && $_GET['login_error']) {
+          print("<div class='error'>Неверный логин</div>");
+        }
+      ?>
     </li>
     <li>
       <label class="field-name">
         Пароль <br>
       </label>
       <input type="text" name="pass" />
+      <?php
+        if (array_key_exists('pass_error', $_GET) && $_GET['pass_error']) {
+          print("<div class='error'>Неверный пароль</div>");
+        }
+      ?>
     </li>
   </ul>
   <input type="submit" class="submit" value="Войти" />
