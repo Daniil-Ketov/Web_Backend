@@ -105,9 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('pass', '', 100000);
     // Выводим сообщение пользователю.
     // Если в куках есть пароль, то выводим сообщение.
-    $messages['data_saved'] = 'Спасибо, результаты сохранены.';
+    $messages['data_saved'] = 'Спасибо, результаты сохранены.<br>';
     if (!empty($_COOKIE['pass'])) {
-      $messages['data_saved'] += sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
+      $messages['data_saved'] .= sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
         и паролем <strong>%s</strong> для изменения данных.',
         strip_tags($_COOKIE['login']),
         strip_tags($_COOKIE['pass']));
