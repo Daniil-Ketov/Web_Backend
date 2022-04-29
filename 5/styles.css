@@ -20,7 +20,8 @@ main {
 }
 form {
     width: 400px;
-    height: 850px;
+    max-width: 900px;
+    display: inline-block;
     padding: 30px;
     margin: 10%;
     background-color: aliceblue;
