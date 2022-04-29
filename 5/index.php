@@ -229,69 +229,43 @@ else {
     setcookie('checkbox_error', '', 100000);
   }
 
-  // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
-  if (!empty($_COOKIE[session_name()]) &&
-      session_start() && !empty($_SESSION['login'])) {
+  // Генерируем уникальный логин и пароль.
+  // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
+  $alph = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $login = uniqid();
+  $pass = '';
+  for ($i = 0; $i < 16; $i++) {
+    $pass .= $alph[random_int(0, strlen($alph) - 1)];
+  }
+  // Сохраняем в Cookies.
+  setcookie('login', $login);
+  setcookie('pass', $pass);
+  // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
+  // Сохранение в XML-документ.
+  try {
     $user = 'u47477';
     $pass_db = '5680591';
     $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass_db, array(PDO::ATTR_PERSISTENT => true));
-    $stmt1 = $db->prepare("UPDATE form SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ? WHERE id = ?");
+    $stmt1 = $db->prepare("INSERT INTO form (name, email, bdate, gender, limbs, bio) SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?");
     $stmt1 -> execute([
       $_POST['name'],
       strtolower($_POST['email']),
       $_POST['bdate'],
       $_POST['gender'],
       $_POST['limbs'],
-      $_POST['bio'],
-      $_SESSION['uid']
+      $_POST['bio']
     ]);
-    $stmt2 = $db->prepare('DELETE FROM super WHERE id = ?');
-    $stmt2->execute([$_SESSION['uid']]);
-    $stmt3 = $db->prepare("INSERT INTO super (id, ability) SET id = ?, ability = ?");
+    $stmt2 = $db->prepare("INSERT INTO super (id, ability) SET id = ?, ability = ?");
+    $id = $db->lastInsertId();
     foreach ($_POST['superpowers'] as $s)
-      $stmt3 -> execute([$_SESSION['uid'], $s]);
+      $stmt2 -> execute([$id, $s]);
+    $stmt3 = $db->prepare(("INSERT into users (id, login, password) SET id = ?, login = ?, password = ?"));
+    $stmt3->execute([$id, $login, md5($pass)]);
   }
-  else {
-    // Генерируем уникальный логин и пароль.
-    // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
-    $alph = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $login = uniqid();
-    $pass = '';
-    for ($i = 0; $i < 16; $i++) {
-      $pass .= $alph[random_int(0, strlen($alph) - 1)];
-    }
-
-    // Сохраняем в Cookies.
-    setcookie('login', $login);
-    setcookie('pass', $pass);
-
-    // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
-    // Сохранение в XML-документ.
-    try {
-      $user = 'u47477';
-      $pass_db = '5680591';
-      $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass_db, array(PDO::ATTR_PERSISTENT => true));
-      $stmt1 = $db->prepare("INSERT INTO form (name, email, bdate, gender, limbs, bio) SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?");
-      $stmt1 -> execute([
-        $_POST['name'],
-        strtolower($_POST['email']),
-        $_POST['bdate'],
-        $_POST['gender'],
-        $_POST['limbs'],
-        $_POST['bio']
-      ]);
-      $stmt2 = $db->prepare("INSERT INTO super (id, ability) SET id = ?, ability = ?");
-      $id = $db->lastInsertId();
-      foreach ($_POST['superpowers'] as $s)
-        $stmt2 -> execute([$id, $s]);
-      $stmt3 = $db->prepare(("INSERT into users (id, login, password) SET id = ?, login = ?, password = ?"));
-      $stmt3->execute([$id, $login, md5($pass)]);
-    }
-    catch (PDOException $e) {
-      setcookie('save_error', '$e->getMessage()', 100000);
-      header('Location: index.php');
-      exit();
-    }
+  catch (PDOException $e) {
+    setcookie('save_error', '$e->getMessage()', 100000);
+    header('Location: index.php');
+    exit();
   }
 
   // Делаем перенаправление.
