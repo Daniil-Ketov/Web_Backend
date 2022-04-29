@@ -100,18 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   // Выдаем сообщение об успешном сохранении.
   if (array_key_exists('save', $_GET) && $_GET['save']) {
-    // Если есть параметр save, то выводим сообщение пользователю.// Удаляем куку, указывая время устаревания в прошлом.
-    setcookie('login', '', 100000);
-    setcookie('pass', '', 100000);
-    // Выводим сообщение пользователю.
-    // Если в куках есть пароль, то выводим сообщение.
-    $messages['data_saved'] = 'Спасибо, результаты сохранены.<br>';
-    if (!empty($_COOKIE['pass'])) {
-      $messages['data_saved'] .= sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
-        и паролем <strong>%s</strong> для изменения данных.',
-        strip_tags($_COOKIE['login']),
-        strip_tags($_COOKIE['pass']));
-    }
+    // Если есть параметр save, то выводим сообщение пользователю.
+    $messages['data_saved'] = 'Спасибо, результаты сохранены.';
   }
 
   // Складываем предыдущие значения полей в массив, если есть.
@@ -124,32 +114,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['bdate'] = empty($_COOKIE['bdate_value']) ? '' : $_COOKIE['bdate_value'];
   $superpowers = empty($_COOKIE['superpowers_value']) ? array() : json_decode($_COOKIE['superpowers_value'], true);
   $values['checkbox'] = empty($_COOKIE['checkbox_value']) ? '' : $_COOKIE['checkbox_value'];
-
-  // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
-  // ранее в сессию записан факт успешного логина.
-  if (empty($errors) && !empty($_COOKIE[session_name()]) &&
-      session_start() && !empty($_SESSION['login'])) {
-    $user = 'u47477';
-    $pass_db = '5680591';
-    $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass_db, array(PDO::ATTR_PERSISTENT => true));
-    $stmt1 = $db->prepare("SELECT * from form WHERE id = ?");
-    $stmt1->execute([$_SESSION['uid']]);
-    $userdata = $stmt1->fetch(PDO::FETCH_ASSOC);
-
-    $values['name'] = $userdata['name'];
-    $values['email'] = $userdata['email'];
-    $values['limbs'] = $userdata['limbs'];
-    $values['gender'] = $userdata['gender'];
-    $values['bio'] = $userdata['bio'];
-    $values['bdate'] = $userdata['bdate'];
-
-    $stmt2 = $db->prepare("SELECT ability from super WHERE id = ?");
-    $stmt2->execute([$_SESSION['uid']]);
-    while($userdata = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-      $superpowers.array_push($userdata['ability']);
-    }
-    printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
-  }
 
   // Включаем содержимое файла form.php.
   // В нем будут доступны переменные $messages, $errors и $values для вывода 
@@ -265,7 +229,6 @@ else {
     setcookie('checkbox_error', '', 100000);
   }
 
-
   // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
   if (!empty($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
@@ -330,7 +293,6 @@ else {
       exit();
     }
   }
-  
 
   // Делаем перенаправление.
   header('Location: index.php?save=1');
