@@ -231,9 +231,9 @@ else {
 
   // Сохранение в XML-документ.
   try {
-    $db_user = 'u47477';
-    $db_pass = '5680591';
-    $db = new PDO('mysql:host=localhost;dbname=u47477', $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true));
+    $user = 'u47477';
+    $pass = '5680591';
+    $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
     $stmt1 = $db->prepare("INSERT INTO form (name, email, bdate, gender, limbs, bio) SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?");
     $stmt1 -> execute([
       $_POST['name'],
