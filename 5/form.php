@@ -81,9 +81,9 @@
             <p <?php if ($errors['superpowers']) {print 'class="error"';} ?> > <?php if ($messages['superpowers']) print $messages['superpowers']; ?> </p>
           </label>
           <select multiple="true" name="superpowers[]" class="select-list">
-              <option value="Бессмертие" <?php if (in_array("Бессмертие", $superpowers)) {print 'selected';} ?> >Бессмертие</option>
-              <option value="Прохождение сквозь стены" <?php if (in_array("Прохождение сквозь стены", $superpowers)) {print 'selected';} ?> >Прохождение сквозь стены</option>
-              <option value="Левитация" <?php if (in_array("Левитация", $superpowers)) {print 'selected';} ?> >Левитация</option>
+              <option value="Бессмертие" <?php if (!empty($superpowers) && in_array("Бессмертие", $superpowers)) {print 'selected';} ?> >Бессмертие</option>
+              <option value="Прохождение сквозь стены" <?php if (!empty($superpowers) && in_array("Прохождение сквозь стены", $superpowers)) {print 'selected';} ?> >Прохождение сквозь стены</option>
+              <option value="Левитация" <?php if (!empty($superpowers) && in_array("Левитация", $superpowers)) {print 'selected';} ?> >Левитация</option>
           </select>
         </li>
         <li>
