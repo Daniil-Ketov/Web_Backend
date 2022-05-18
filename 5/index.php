@@ -308,7 +308,7 @@ else {
       $user = 'u47477';
       $pass_db = '5680591';
       $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass_db, array(PDO::ATTR_PERSISTENT => true));
-      $stmt1 = $db->prepare("INSERT INTO form (name, email, bdate, gender, limbs, bio) SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?");
+      $stmt1 = $db->prepare("INSERT INTO form SET name = ?, email = ?, bdate = ?, gender = ?, limbs = ?, bio = ?");
       $stmt1 -> execute([
         $_POST['name'],
         strtolower($_POST['email']),
@@ -317,11 +317,11 @@ else {
         $_POST['limbs'],
         $_POST['bio']
       ]);
-      $stmt2 = $db->prepare("INSERT INTO super (id, ability) SET id = ?, ability = ?");
+      $stmt2 = $db->prepare("INSERT INTO super SET id = ?, ability = ?");
       $id = $db->lastInsertId();
       foreach ($_POST['superpowers'] as $s)
         $stmt2 -> execute([$id, $s]);
-      $stmt3 = $db->prepare(("INSERT into users (id, login, password) SET id = ?, login = ?, password = ?"));
+      $stmt3 = $db->prepare(("INSERT into users SET id = ?, login = ?, password = ?"));
       $stmt3->execute([$id, $login, md5($pass)]);
     }
     catch (PDOException $e) {
