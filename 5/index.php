@@ -321,7 +321,7 @@ else {
       $id = $db->lastInsertId();
       foreach ($_POST['superpowers'] as $s)
         $stmt2 -> execute([$id, $s]);
-      $stmt3 = $db->prepare(("INSERT into users SET id = ?, login = ?, password = ?"));
+      $stmt3 = $db->prepare("INSERT into users SET id = ?, login = ?, password = ?");
       $stmt3->execute([$id, $login, md5($pass)]);
     }
     catch (PDOException $e) {
