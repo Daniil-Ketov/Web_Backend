@@ -112,9 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         strip_tags($_COOKIE['login']),
         strip_tags($_COOKIE['pass']));
     }
-    if (empty($errors) && !empty($_COOKIE[session_name()]) &&
-      session_start() && !empty($_SESSION['login'])) {
-      $messages['data_saved'] .= 'Вы можете <button type="button" class="submit" value="exit">Выйти</button>';
+    else {
+      $messages['data_saved'] .= 'Вы можете <a href="index.php?logout=1">выйти</a>';
     }
   }
 
@@ -162,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 // Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
 else {
-  if (!empty($_POST['exit'])) {
+  if (!empty($_GET['logout'])) {
     session_destroy();
     setcookie('name_value', '', 100000);
     setcookie('email_value', '', 100000);
