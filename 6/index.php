@@ -112,6 +112,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         strip_tags($_COOKIE['login']),
         strip_tags($_COOKIE['pass']));
     }
+    if (empty($errors) && !empty($_COOKIE[session_name()]) &&
+      session_start() && !empty($_SESSION['login'])) {
+      $messages['data_saved'] .= 'Вы можете <button type="button" class="submit" value="exit">Выйти</button>';
+    }
   }
 
   // Складываем предыдущие значения полей в массив, если есть.
@@ -158,6 +162,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 // Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
 else {
+  if (!empty($_POST['exit'])) {
+    session_destroy();
+    setcookie('name_value', '', 100000);
+    setcookie('email_value', '', 100000);
+    setcookie('gender_value', '', 100000);
+    setcookie('limbs_value', '', 100000);
+    setcookie('bio_value', '', 100000);
+    setcookie('bdate_value', '', 100000);
+    setcookie('superpowers_value', '', 100000);
+    session_destroy();
+    header('Location: index.php');
+  }
   // Проверяем ошибки.
   $errors = FALSE;
   if (empty($_POST['name'])) {
