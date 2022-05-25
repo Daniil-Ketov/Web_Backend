@@ -19,11 +19,12 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
 }
 
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
-
 ?>
-
-<button type="button" name="show">Вывести данные</button>
-<button type="button" name="delete">Удалить данные</button>
+<br>
+<form>
+  <button type="button" name="show">Вывести данные</button>
+  <button type="button" name="delete">Удалить данные</button>
+</form>
 
 <?php
 // *********
