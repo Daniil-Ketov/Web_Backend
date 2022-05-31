@@ -1,36 +1,52 @@
 <?php
 
-/**
- * Задача 6. Реализовать вход администратора с использованием
- * HTTP-авторизации для просмотра и удаления результатов.
- **/
-
-// Пример HTTP-аутентификации.
-// PHP хранит логин и пароль в суперглобальном массиве $_SERVER.
-// Подробнее см. стр. 26 и 99 в учебном пособии Веб-программирование и веб-сервисы.
 if (empty($_SERVER['PHP_AUTH_USER']) ||
     empty($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] != 'admin' ||
-    md5($_SERVER['PHP_AUTH_PW']) != md5('123')) {
+    !empty($_GET['logout'])) {
   header('HTTP/1.1 401 Unanthorized');
-  header('WWW-Authenticate: Basic realm="My site"');
+  header('WWW-Authenticate: Basic realm="Authorization error"');
   print('<h1>401 Требуется авторизация</h1>');
   exit();
 }
+
+  $user = 'u47477';
+  $pass_db = '5680591';
+  $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass_db, array(PDO::ATTR_PERSISTENT => true));
+  $stmt1 = $db->prepare("SELECT * from admins WHERE login = ?");
+  $stmt1->execute([$_SERVER['PHP_AUTH_USER']]);
+  $admindata = $stmt1->fetch(PDO::FETCH_ASSOC);
+  if (empty($admindata) || $admindata['pass'] != md5($_SERVER['PHP_AUTH_PW'])) {
+    header('HTTP/1.1 401 Unanthorized');
+    header('WWW-Authenticate: Basic realm="Authorization error"');
+    print('<h1>401 Неверные данные входа</h1>');
+    exit();
+  }
 
 print('Вы успешно авторизовались и видите защищенные паролем данные.');
 ?>
 <br>
 <form>
-  <button type="button" name="show">Вывести данные</button>
-  <button type="button" name="delete">Удалить данные</button>
+  <a href="./?logout=1">Выйти</a>
 </form>
 
 <?php
-// *********
-// Здесь нужно прочитать отправленные ранее пользователями данные и вывести в таблицу.
-// Реализовать просмотр и удаление всех данных.
-// *********
-
-
+  if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $stmtc = $db->prepare("SELECT ability, count(s.id) AS count FROM super AS s GROUP BY s.ability");
+    $stmtc->execute();
+    while($r = $stmtc->fetch(PDO::FETCH_ASSOC)) {
+      print($r['ability'] . " " . $r['count'] . "<br>");
+    }
+    $stmt1 = $db->prepare("SELECT * from form");
+    $stmt1->execute();
+    while($r = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+        print();
+        $stmt2 = $db->prepare("SELECT ability from super WHERE id = ?");
+        $stmt2->execute([$r['id']);
+        while($userdata = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+            $superpowers.array_push($userdata['ability']);
+        }
+    }
+    
+    }
+  }
 ?>
