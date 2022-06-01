@@ -26,15 +26,15 @@ print('Вы успешно авторизовались и видите защи
 ?>
 <br>
 <form>
-  <a href="./?logout=1">Выйти</a>
+  <a href="./admin.php?logout=1">Выйти</a>
 </form>
 <table><tr><th>ability</th><th>count</th></tr>
 <?php
   if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $stmtc = $db->prepare("SELECT ability, count(s.id) AS c FROM super AS s GROUP BY s.ability");
+    $stmtc = $db->prepare("SELECT s.ability, count(s.id) AS c FROM super AS s GROUP BY s.ability");
     $stmtc->execute();
     while($r = $stmtc->fetch(PDO::FETCH_ASSOC)) {
-      print("<tr><th>".$r['ability'] . "</th><th>" . $r['c'] . "</th></tr>");
+      print("<tr><th>".$r['s.ability'] . "</th><th>" . $r['c'] . "</th></tr>");
     }
     print("<table><tr><th>id</th><th>name</th><th>email</th><th>bdate</th><th>gender</th><th>limbs</th><th>super</th><th>bio</th><th></th></tr>");
     $stmt1 = $db->prepare("SELECT * from form");
@@ -66,5 +66,9 @@ print('Вы успешно авторизовались и видите защи
         $stmt2 = $db->prepare('DELETE FROM super WHERE id = ?');
         $stmt2->execute([$_POST['id']]);
     }
+    else if (array_key_exists('edit', $_POST)) {
+        
+    }
+    header('Location: admin.php');
   }
 ?>
