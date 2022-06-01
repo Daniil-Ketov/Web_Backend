@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Выводим сообщение пользователю.
     // Если в куках есть пароль, то выводим сообщение.
     $messages['data_saved'] = 'Спасибо, результаты сохранены.<br>';
-    if (!empty($_COOKIE['pass'])&&()) {
+    if (!empty($_COOKIE['pass'])&&empty($_SESSION['uid'])) {
       $messages['data_saved'] .= sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
         и паролем <strong>%s</strong> для изменения данных.',
         strip_tags($_COOKIE['login']),
@@ -162,7 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 // Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
 else {
   if (!empty($_GET['logout'])) {
-    session_destroy();
+    $_SESSION['uid'] = '';
+    $_SESSION['login'] = '';
     setcookie('name_value', '', 100000);
     setcookie('email_value', '', 100000);
     setcookie('gender_value', '', 100000);
