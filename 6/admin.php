@@ -47,7 +47,11 @@ print('Вы успешно авторизовались и видите защи
         while($userdata = $stmt2->fetch(PDO::FETCH_ASSOC)) {
             $superpowers .= $userdata['ability'] . ", ";
         }
-        print("<th>".$superpowers."</th><th>".$r['bio']."</th><input  type="submit" name="edit" class="button" value="edit"><input  type="submit" name="delete" class="button" value="delete"></tr>");
+        print("<th>".$superpowers."</th><th>".$r['bio']."</th>");
+        ?>
+    <input  type="submit" name="edit" class="button" value="edit">
+    <input  type="submit" name="delete" class="button" value="delete"></tr>
+<?php
     }
   }
   else {
