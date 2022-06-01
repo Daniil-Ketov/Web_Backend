@@ -49,7 +49,7 @@ print('Вы успешно авторизовались и видите защи
         }
         print("<th>".$superpowers."</th><th>".$r['bio']."</th>");
         ?>
-    <th><form method="POST">
+    <th><form action="admin.php" method="POST">
         <input  type="hidden" name="id" value="<?php print($r['id']); ?>" />
         <input  type="submit" name="edit" class="button" value="edit" />
         <input  type="submit" name="delete" class="button" value="delete" /></form></th></tr>
