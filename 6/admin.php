@@ -47,10 +47,18 @@ print('Вы успешно авторизовались и видите защи
         while($userdata = $stmt2->fetch(PDO::FETCH_ASSOC)) {
             $superpowers .= $userdata['ability'] . ", ";
         }
-        print("<th>".$superpowers."</th><th>".$r['bio']."</th><input  type="submit" name="<?php print("edit".$r['id']); ?>" class="button" value="<?php print("edit".$r['id']); ?>"><input  type="submit" name="<?php print("delete".$r['id']); ?>" class="button" value="<?php print("delete".$r['id']); ?>"></tr>");
+        print("<th>".$superpowers."</th><th>".$r['bio']."</th><input  type="submit" name="<?php print("edit"); ?>" class="button" value="<?php print("edit"); ?>"><input  type="submit" name="<?php print("delete"); ?>" class="button" value="<?php print("delete"); ?>"></tr>");
     }
   }
   else {
-    
+    if (array_key_exists('delete', $_POST)) {
+        $user = 'u47477';
+    $pass_db = '5680591';
+    $db = new PDO('mysql:host=localhost;dbname=u47477', $user, $pass_db, array(PDO::ATTR_PERSISTENT => true));
+    $stmt1 = $db->prepare("DELETE FROM form WHERE id = ?");
+    $stmt1 -> execute([$_POST['id']]);
+    $stmt2 = $db->prepare('DELETE FROM super WHERE id = ?');
+    $stmt2->execute([$_POST['id']]);
+    }
   }
 ?>
