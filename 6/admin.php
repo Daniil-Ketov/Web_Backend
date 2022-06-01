@@ -42,7 +42,7 @@ print('Вы успешно авторизовались и видите защи
     while($r = $stmt1->fetch(PDO::FETCH_ASSOC)) {
         print("<tr><th>".$r['id']."</th><th>".$r['name']."</th><th>".$r['email']."</th><th>".$r['bdate']."</th><th>".$r['gender']."</th><th>".$r['limbs']."</th>");
         $stmt2 = $db->prepare("SELECT ability from super WHERE id = ?");
-        $stmt2->execute([$r['id']);
+        $stmt2->execute([$r['id']]);
         $superpowers = "";
         while($userdata = $stmt2->fetch(PDO::FETCH_ASSOC)) {
             $superpowers .= $userdata['ability'] . ", ";
