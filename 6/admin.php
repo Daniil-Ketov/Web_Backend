@@ -31,10 +31,10 @@ print('Вы успешно авторизовались и видите защи
 <table><tr><th>ability</th><th>count</th></tr>
 <?php
   if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $stmtc = $db->prepare("SELECT s.ability, count(s.id) AS c FROM super AS s GROUP BY s.ability");
+    $stmtc = $db->prepare("SELECT ability, count(id) AS count FROM super GROUP BY ability");
     $stmtc->execute();
     while($r = $stmtc->fetch(PDO::FETCH_ASSOC)) {
-      print("<tr><th>".$r['s.ability'] . "</th><th>" . $r['c'] . "</th></tr>");
+      print("<tr><th>".$r['ability'] . "</th><th>" . $r['count'] . "</th></tr>");
     }
     print("<table><tr><th>id</th><th>name</th><th>email</th><th>bdate</th><th>gender</th><th>limbs</th><th>super</th><th>bio</th><th></th></tr>");
     $stmt1 = $db->prepare("SELECT * from form");
