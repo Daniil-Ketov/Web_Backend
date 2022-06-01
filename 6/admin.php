@@ -36,17 +36,21 @@ print('Вы успешно авторизовались и видите защи
     while($r = $stmtc->fetch(PDO::FETCH_ASSOC)) {
       print($r['ability'] . " " . $r['count'] . "<br>");
     }
+    print("<table><tr><th>id</th><th>name</th><th>email</th><th>bdate</th><th>gender</th><th>limbs</th><th>super</th><th>bio</th><th></th></tr>");
     $stmt1 = $db->prepare("SELECT * from form");
     $stmt1->execute();
     while($r = $stmt1->fetch(PDO::FETCH_ASSOC)) {
-        print();
+        print("<tr><th>".$r['id']."</th><th>".$r['name']."</th><th>".$r['email']."</th><th>".$r['bdate']."</th><th>".$r['gender']."</th><th>".$r['limbs']."</th>");
         $stmt2 = $db->prepare("SELECT ability from super WHERE id = ?");
         $stmt2->execute([$r['id']);
+        $superpowers = "";
         while($userdata = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            $superpowers.array_push($userdata['ability']);
+            $superpowers .= $userdata['ability'] . ", ";
         }
+        print("<th>".$superpowers."</th><th>".$r['bio']."</th><input  type="submit" name="<?php print("edit".$r['id']); ?>" class="button" value="<?php print("edit".$r['id']); ?>"><input  type="submit" name="<?php print("delete".$r['id']); ?>" class="button" value="<?php print("delete".$r['id']); ?>"></tr>");
     }
+  }
+  else {
     
-    }
   }
 ?>
