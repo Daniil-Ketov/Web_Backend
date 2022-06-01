@@ -49,8 +49,8 @@ print('Вы успешно авторизовались и видите защи
         }
         print("<th>".$superpowers."</th><th>".$r['bio']."</th>");
         ?>
-    <input  type="submit" name="edit" class="button" value="edit">
-    <input  type="submit" name="delete" class="button" value="delete"></tr>
+    <th><input  type="submit" name="edit" class="button" value="edit">
+        <input  type="submit" name="delete" class="button" value="delete"></th></tr>
 <?php
     }
   }
