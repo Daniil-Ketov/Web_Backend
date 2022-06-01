@@ -28,13 +28,13 @@ print('Вы успешно авторизовались и видите защи
 <form>
   <a href="./?logout=1">Выйти</a>
 </form>
-
+<table><tr><th>ability</th><th>count</th></tr>
 <?php
   if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $stmtc = $db->prepare("SELECT ability, count(s.id) AS count FROM super AS s GROUP BY s.ability");
+    $stmtc = $db->prepare("SELECT ability, count(s.id) AS c FROM super AS s GROUP BY s.ability");
     $stmtc->execute();
     while($r = $stmtc->fetch(PDO::FETCH_ASSOC)) {
-      print($r['ability'] . " " . $r['count'] . "<br>");
+      print("<tr><th>".$r['ability'] . "</th><th>" . $r['c'] . "</th></tr>");
     }
     print("<table><tr><th>id</th><th>name</th><th>email</th><th>bdate</th><th>gender</th><th>limbs</th><th>super</th><th>bio</th><th></th></tr>");
     $stmt1 = $db->prepare("SELECT * from form");
@@ -49,8 +49,10 @@ print('Вы успешно авторизовались и видите защи
         }
         print("<th>".$superpowers."</th><th>".$r['bio']."</th>");
         ?>
-    <th><input  type="submit" name="edit" class="button" value="edit">
-        <input  type="submit" name="delete" class="button" value="delete"></th></tr>
+    <th><form method="POST">
+        <input  type="radio" name="id" value="<?php print($r['id']); ?>" checked>
+        <input  type="submit" name="edit" class="button" value="edit">
+        <input  type="submit" name="delete" class="button" value="delete"></form></th></tr>
 <?php
     }
   }
